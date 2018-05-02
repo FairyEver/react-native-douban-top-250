@@ -1,5 +1,7 @@
 {
   "expo": {
     "sdkVersion": "27.0.0"
-  }
+  },
+  "name": "doubantop250",
+  "displayName": "全球热门电影精享"
 }
