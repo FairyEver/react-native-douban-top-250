@@ -1,10 +1,10 @@
 import React from 'react';
-import { Text, View, FlatList } from 'react-native';
+import { FlatList, Text, View, Image } from 'react-native';
 // 样式
 import styles from '../style'
 
 // API地址
-const API_LIST = 'https://api.douban.com/v2/movie/top250';
+const API_LIST = 'https://api.douban.com/v2/movie/top250?start=0&count=9';
 
 // 列表为空的时候显示的组件
 const EmptyDisplay = () => {
@@ -19,9 +19,20 @@ class ListItem extends React.Component {
     super(props)
   };
   render () {
+    console.log(this.props.data.images.large)
     return (
-      <View>
-        <Text>{this.props.data.title}</Text>
+      <View style={styles.topListItem}>
+        <Image
+          style={styles.topListItemImage}
+          resizeMode="cover"
+          source={{uri: this.props.data.images.large}}
+        />
+        <Text
+          style={styles.topListItemTitle}
+          numberOfLines={1}
+        >
+          {this.props.data.title}
+        </Text>
       </View>
     )
   };
