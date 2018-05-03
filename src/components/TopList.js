@@ -108,7 +108,6 @@ export default class extends React.Component {
   render () {
     return (
       <FlatList
-        style={{marginBottom: 64}}
         numColumns={3}
         ListEmptyComponent={Loading}
         data={this.state.list}
