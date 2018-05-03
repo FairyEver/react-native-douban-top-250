@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text  } from 'react-native';
-import { Spinner } from 'native-base';
+import { StyleSheet, View, Text, ActivityIndicator  } from 'react-native';
 
 // 列表为空的时候显示的组件
 export default class extends React.Component {
@@ -10,14 +9,14 @@ export default class extends React.Component {
   render () {
     return (
       <View style={LoadingStyles.body}>
-        <Spinner color="#333" />
+        <ActivityIndicator />
       </View>
     )
   }
-}
+};
 
 const LoadingStyles = StyleSheet.create({
   body: {
     marginTop: 100
   }
-})
+});
