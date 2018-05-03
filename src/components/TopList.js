@@ -83,24 +83,24 @@ export default class extends React.Component {
       return
     }
     const { start, count } = this.fetchSetting;
-    // fetch(`${API_LIST}?start=${start}&count=${count}`)
-    //   .then(res => res.json())
-    //   .then(res => {
-    //     const subjects = res.subjects || []
-    //     if (subjects.length > 0) {
-    //       const newData = res.subjects.map(e => ({
-    //         ...e,
-    //         key: Math.random() * 10000000000
-    //       }));
-    //       console.log(newData)
-    //       this.setState({
-    //         list: [...this.state.list, ...newData]
-    //       });
-    //       this.fetchSetting.start += count;
-    //     } else {
-    //       this.end = true
-    //     }
-    //   });
+    fetch(`${API_LIST}?start=${start}&count=${count}`)
+      .then(res => res.json())
+      .then(res => {
+        const subjects = res.subjects || []
+        if (subjects.length > 0) {
+          const newData = res.subjects.map(e => ({
+            ...e,
+            key: Math.random() * 10000000000
+          }));
+          console.log(newData)
+          this.setState({
+            list: [...this.state.list, ...newData]
+          });
+          this.fetchSetting.start += count;
+        } else {
+          this.end = true
+        }
+      });
   };
   handleEndReached = () => {
     this.getData();
