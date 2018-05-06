@@ -4,15 +4,23 @@ import { View, Text, TabBarIOS } from 'react-native';
 import PageTop250 from '../PageTop250'
 
 export default class PageTabBar extends React.Component {
+
+  // 颜色设置
+  yellowOrange = '#fbb03d';
+  green = '#23a06e';
+  dodgerBlue = '#2490f8';
+  bluePurple = '#7f25fb';
+  COLOR_TOP250 = '#fc1368';
+
   state = {
     activeTab: 'top',
-    tintColor: '#FF0066'
+    tintColor: this.COLOR_TOP250
   };
   render() {
     return (
       <View style={{flex: 1}}>
         <TabBarIOS
-          tintColor={this.tintColor}
+          tintColor={this.state.tintColor}
         >
           <TabBarIOS.Item
             title="TOP250"
