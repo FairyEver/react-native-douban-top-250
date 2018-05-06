@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList, View, Text, Image, StyleSheet } from 'react-native';
 
-import Loading from './Loading'
+import Loading from '../Loading'
 
 // API地址
 const API_LIST = 'https://api.douban.com/v2/movie/top250';

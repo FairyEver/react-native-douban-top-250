@@ -1,12 +1,12 @@
 import React from 'react';
 // import { StyleSheet, View, NavigatorIOS } from 'react-native';
 
-import TopList from '../components/MovieList/index.js'
+import MovieList from '../../components/MovieList'
 
 export default class App extends React.Component {
   render() {
     return (
-      <TopList />
+      <MovieList />
     );
   }
 };
