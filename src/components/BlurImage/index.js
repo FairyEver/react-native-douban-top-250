@@ -41,7 +41,7 @@ export default class BlurImage extends React.Component {
 }
 const StyleBlurImage = StyleSheet.create({
   body: {
-    height: 200,
+    flex: 1,
     position: 'relative'
   },
   absolute: {

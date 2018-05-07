@@ -2,15 +2,16 @@ import React from 'react';
 import { StyleSheet, View, Text, Image, findNodeHandle } from 'react-native';
 import { BlurView } from 'react-native-blur';
 
+// 模糊图片组件
+import BlurImage from '../../components/BlurImage'
+
 // API地址
 const API_PATH = 'https://api.douban.com/v2/movie/subject/';
 
 export default class MovieDetails extends React.Component {
 
   static defaultProps = {
-    // 默认参数 默认是肖申克的救赎 避免出错
-    id: '1292052',
-    image: ''
+    movieData: {}
   };
 
   state = {
@@ -46,18 +47,12 @@ export default class MovieDetails extends React.Component {
   render() {
     return (
       <View style={StylesMovieDetails.body}>
-        <Image
-          ref={(img) => { this.backgroundImage = img; }}
-          source={{uri: this.props.image}}
-          style={StylesMovieDetails.absolute}
-          onLoadEnd={this.imageLoaded.bind(this)}
-        />
-        <BlurView
-          style={StylesMovieDetails.absolute}
-          viewRef={this.state.viewRef}
-          blurType="dark"
-          blurAmount={10}
-        />
+        <View style={StylesMovieDetails.absolute}>
+          <BlurImage uri={this.props.movieData.images.large}/>
+        </View>
+        <View style={StylesMovieDetails.containerHeader}>
+
+        </View>
         <View style={StylesMovieDetails.container}>
           <View style={StylesMovieDetails.containerHeader}></View>
           <View style={StylesMovieDetails.containerBody}></View>
@@ -70,6 +65,7 @@ export default class MovieDetails extends React.Component {
 const StylesMovieDetails = StyleSheet.create({
   body: {
     flex: 1,
+    marginTop: 60,
     position: 'relative'
   },
   absolute: {
@@ -84,11 +80,9 @@ const StylesMovieDetails = StyleSheet.create({
     marginTop: 60
   },
   containerHeader: {
-    height: 200,
-    backgroundColor: '#333'
+    height: 200
   },
   containerBody: {
-    flex: 1,
-    backgroundColor: '#666'
+    flex: 1
   }
 })

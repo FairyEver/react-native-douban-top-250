@@ -1,8 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
 
+// 星星和评分
 import Rating from '../Rating'
 
+// 模糊图片组件
 import BlurImage from '../BlurImage'
 
 // 列表的每一项
