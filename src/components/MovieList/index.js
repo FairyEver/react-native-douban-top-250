@@ -1,61 +1,167 @@
 import React from 'react';
-import { FlatList, View, Text, Image, StyleSheet } from 'react-native';
+import {FlatList, View, Text, Image, StyleSheet, findNodeHandle} from 'react-native';
+import { BlurView } from 'react-native-blur';
 
 import Loading from '../Loading'
 
 // API地址
 const API_LIST = 'https://api.douban.com/v2/movie/top250';
 
-
+class Stars extends React.Component {
+  render () {
+    return (
+      <View style={styleStars.body}>
+        <View style={styleStars.average}>
+          <Text style={styleStars.averageText}>{this.props.average}</Text>
+        </View>
+        {
+          [...Array(10)].map((e, index) => index + 1).map(e => {
+            const average = this.props.average;
+            if (e <= average) {
+              return (<Image key={e} style={styleStars.star} source={require('../../image/icon/star/10.png')} />);
+            } else if (e - average < 1) {
+              const n = 10 * average - 10 * (e - 1);
+              switch (n) {
+                case 1: return (<Image key={e} style={styleStars.star} source={require('../../image/icon/star/1.png')} />); break;
+                case 2: return (<Image key={e} style={styleStars.star} source={require('../../image/icon/star/2.png')} />); break;
+                case 3: return (<Image key={e} style={styleStars.star} source={require('../../image/icon/star/3.png')} />); break;
+                case 4: return (<Image key={e} style={styleStars.star} source={require('../../image/icon/star/4.png')} />); break;
+                case 5: return (<Image key={e} style={styleStars.star} source={require('../../image/icon/star/5.png')} />); break;
+                case 6: return (<Image key={e} style={styleStars.star} source={require('../../image/icon/star/6.png')} />); break;
+                case 7: return (<Image key={e} style={styleStars.star} source={require('../../image/icon/star/7.png')} />); break;
+                case 8: return (<Image key={e} style={styleStars.star} source={require('../../image/icon/star/8.png')} />); break;
+                case 9: return (<Image key={e} style={styleStars.star} source={require('../../image/icon/star/9.png')} />); break;
+                default: break;
+              }
+            } else {
+              return (<Image key={e} style={styleStars.star} source={require('../../image/icon/star/0.png')} />);
+            }
+          })
+        }
+      </View>
+    )
+  }
+}
+const styleStars = StyleSheet.create({
+  body: {
+    flexDirection: 'row',
+    marginTop: 5
+  },
+  average: {
+    height: 14,
+    borderRadius: 2,
+    paddingLeft: 2,
+    paddingRight: 2,
+    backgroundColor: '#FECD2F',
+    marginRight: 5,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  averageText: {
+    color: '#000',
+    fontSize: 10,
+    fontWeight: 'bold'
+  },
+  star: {
+    height: 14,
+    width: 14,
+    marginRight: 2
+  }
+})
 
 // 列表的每一项
 class TopListItem extends React.Component {
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
+    this.state = { viewRef: null };
+  };
+  imageLoaded() {
+    this.setState({ viewRef: findNodeHandle(this.backgroundImage) });
   };
   render () {
+    console.log(this.props.data)
     return (
-      <View style={TopListItemStyles.body}>
+      <View style={styleTopListItem.body}>
+        {/*背景*/}
         <Image
-          style={TopListItemStyles.image}
+          ref={(img) => { this.backgroundImage = img; }}
           source={{uri: this.props.data.images.large}}
+          style={styleTopListItem.absolute}
+          onLoadEnd={this.imageLoaded.bind(this)}
         />
-        <View style={TopListItemStyles.infoGroup}>
-          <Text style={TopListItemStyles.title} numberOfLines={1}>{this.props.data.title}</Text>
-          <Text style={TopListItemStyles.genres}>{this.props.data.genres.join(' ')}</Text>
+        <BlurView
+          style={styleTopListItem.absolute}
+          viewRef={this.state.viewRef}
+          blurType="dark"
+          blurAmount={10}
+        />
+        {/*前景*/}
+        <View
+          style={styleTopListItem.layerInfo}
+        >
+          <Image
+            style={styleTopListItem.cover}
+            source={{uri: this.props.data.images.large}}
+          />
+          <View
+            style={styleTopListItem.infoGroup}
+          >
+            <Text style={styleTopListItem.title} numberOfLines={1}>{this.props.data.title}</Text>
+            <Text style={styleTopListItem.subTitle} numberOfLines={1}>{this.props.data.original_title} {this.props.data.year}</Text>
+            <Text style={styleTopListItem.genres}>{this.props.data.genres.join(' ')}</Text>
+            <Stars average={this.props.data.rating.average} />
+          </View>
         </View>
       </View>
     )
   };
 }
-const TopListItemStyles = StyleSheet.create({
+
+const styleTopListItem = StyleSheet.create({
   body: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 10
+    height: 200,
+    position: 'relative'
   },
-  image: {
-    width: 27 * 3,
-    height: 40 * 3,
-    borderRadius: 2
+  absolute: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
+  },
+  layerInfo: {
+    ...this.absolute,
+    flexDirection: 'row'
+  },
+  cover: {
+    margin: 10,
+    height: 180,
+    width: 180 * 270 / 400,
+    borderRadius: 2,
+    borderWidth: 2,
+    borderColor: '#FFF'
   },
   infoGroup: {
-    marginLeft: 10
+    marginTop: 10,
+    marginBottom: 10,
+    marginRight: 10
   },
   title: {
-    fontSize: 12,
-    fontWeight: 'bold',
-    marginBottom: 5,
-    marginTop: 5,
-    textAlign: 'center'
+    color: '#FFF',
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+  subTitle: {
+    color: 'rgba(255, 255, 255, 0.7)',
+    fontSize: 10,
+    marginTop: 5
   },
   genres: {
-    color: '#333',
-    fontSize: 10,
-    textAlign: 'center'
+    color: 'rgba(255, 255, 255, 0.7)',
+    fontSize: 12,
+    marginTop: 5
   }
-});
+})
 
 
 
@@ -90,7 +196,7 @@ export default class extends React.Component {
         if (subjects.length > 0) {
           const newData = res.subjects.map(e => ({
             ...e,
-            key: Math.random() * 10000000000
+            key: String(Math.random() * 10000000000)
           }));
           console.log(newData)
           this.setState({
@@ -108,7 +214,6 @@ export default class extends React.Component {
   render () {
     return (
       <FlatList
-        numColumns={3}
         ListEmptyComponent={Loading}
         data={this.state.list}
         onEndReachedThreshold={0.5}

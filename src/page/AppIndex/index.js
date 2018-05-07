@@ -4,6 +4,7 @@ import { View, Text, TabBarIOS } from 'react-native';
 import unit from '../../unit/index.js';
 
 import PageTop250 from '../PageTop250';
+import NewMovie from '../NewMovie'
 
 export default class AppIndex extends React.Component {
 
@@ -25,10 +26,11 @@ export default class AppIndex extends React.Component {
     this.setState({
       activeTab: tabName,
       tintColor: color
-    })
+    });
   };
 
   render () {
+    const { navigator } = this.props;
     return (
       <View style={{flex: 1}}>
         <TabBarIOS tintColor={this.state.tintColor}>
@@ -38,7 +40,7 @@ export default class AppIndex extends React.Component {
             selectedIcon={require('../../image/icon/tabbar/fire-active.png')}
             selected={this.state.activeTab === 'top'}
             onPress={() => {this.toggleTab('top')}}>
-            <PageTop250 navigator={this.props.navigator}/>
+            <PageTop250 navigator={navigator}/>
           </TabBarIOS.Item>
           <TabBarIOS.Item
             title="新片榜"
@@ -46,7 +48,7 @@ export default class AppIndex extends React.Component {
             selectedIcon={require('../../image/icon/tabbar/new-active.png')}
             selected={this.state.activeTab === 'new'}
             onPress={() => {this.toggleTab('new')}}>
-            <Text>新片榜</Text>
+            <NewMovie />
           </TabBarIOS.Item>
           <TabBarIOS.Item
             title="正在热映"
@@ -76,5 +78,4 @@ export default class AppIndex extends React.Component {
       </View>
     );
   }
-
 }
