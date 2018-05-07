@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 
 export default class Rating extends React.Component {
+
   static defaultProps = {
     unit: '分',
     average: 0,

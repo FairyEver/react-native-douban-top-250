@@ -9,6 +9,8 @@ export default class App extends React.Component {
     return (
       <NavigatorIOS
         style={styles.navigator}
+        // barTintColor={'#000'}
+        // titleTextColor={'#FFF'}
         initialRoute={{
           title: '全球电影精享',
           component: AppIndex

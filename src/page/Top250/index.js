@@ -13,7 +13,8 @@ export default class App extends React.Component {
       title: movieData.title,
       component: MovieDetails,
       passProps: {
-        id: movieData.id
+        id: movieData.id,
+        image: movieData.images.large
       }
     })
   };

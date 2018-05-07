@@ -71,7 +71,7 @@ export default class MovieList extends React.Component {
         onEndReached={this.handleEndReached}
         renderItem={({item}) => {
           return (
-            <MovieListItem data={item} onPress={this.handlePress}/>
+            <MovieListItem movieData={item} onPress={this.handlePress}/>
           )
         }}
       />

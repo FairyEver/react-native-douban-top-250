@@ -1,63 +1,50 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity, findNodeHandle} from 'react-native';
-import { BlurView } from 'react-native-blur';
+import { StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
 
 import Rating from '../Rating'
 
+import BlurImage from '../BlurImage'
+
 // 列表的每一项
 export default class TopListItem extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { viewRef: null };
+
+  static defaultProps = {
+    // 模式 默认是列表模式 还可以是 header
+    // header 模式下没有背景图
+    mode: 'list'
   };
-  imageLoaded = () => {
-    this.setState({ viewRef: findNodeHandle(this.backgroundImage) });
-  };
+
   // 当点击了这项后
   handlePress = (MovieData) => {
     if (this.props.onPress) {
       this.props.onPress(MovieData)
     }
   };
+
   render () {
     return (
-      <TouchableOpacity onPress={() => {this.handlePress(this.props.data)}} activeOpacity={0.9}>
-        <View style={styleTopListItem.body}>
-          <Image
-            ref={(img) => { this.backgroundImage = img; }}
-            source={{uri: this.props.data.images.large}}
-            style={styleTopListItem.absolute}
-            onLoadEnd={this.imageLoaded.bind(this)}
-          />
-          <BlurView
-            style={styleTopListItem.absolute}
-            viewRef={this.state.viewRef}
-            blurType="dark"
-            blurAmount={10}
-          />
-          <View
-            style={styleTopListItem.layerInfo}
-          >
+      <TouchableOpacity onPress={() => {this.handlePress(this.props.movieData)}} activeOpacity={0.9}>
+        <View style={StylesTopListItem.body}>
+          <View style={StylesTopListItem.absolute}>
+            <BlurImage uri={this.props.movieData.images.large}></BlurImage>
+          </View>
+          {/*信息层*/}
+          <View style={StylesTopListItem.layerInfo}>
             <Image
-              style={styleTopListItem.cover}
-              source={{uri: this.props.data.images.large}}
+              style={StylesTopListItem.cover}
+              source={{uri: this.props.movieData.images.large}}
             />
-            <View
-              style={styleTopListItem.infoGroup}
-            >
-              <Text style={styleTopListItem.title} numberOfLines={1}>
-                {this.props.data.title}
+            <View style={StylesTopListItem.infoGroup}>
+              <Text style={StylesTopListItem.title} numberOfLines={1}>
+                {this.props.movieData.title}
               </Text>
-              <Text style={styleTopListItem.subTitle} numberOfLines={1}>
-                {this.props.data.original_title} {this.props.data.year}
+              <Text style={StylesTopListItem.subTitle} numberOfLines={1}>
+                {this.props.movieData.original_title} {this.props.movieData.year}
               </Text>
-              <Text style={styleTopListItem.genres}>
-                {this.props.data.genres.join(' ')}
+              <Text style={StylesTopListItem.genres}>
+                {this.props.movieData.genres.join(' ')}
               </Text>
-              <Rating
-                average={this.props.data.rating.average}
-                stars={Number(this.props.data.rating.stars)}
-              />
+              <Rating average={this.props.movieData.rating.average} stars={Number(this.props.movieData.rating.stars)}/>
             </View>
           </View>
         </View>
@@ -65,7 +52,7 @@ export default class TopListItem extends React.Component {
     )
   };
 }
-const styleTopListItem = StyleSheet.create({
+const StylesTopListItem = StyleSheet.create({
   body: {
     height: 200,
     position: 'relative'
