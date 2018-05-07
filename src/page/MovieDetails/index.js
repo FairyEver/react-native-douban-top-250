@@ -5,6 +5,9 @@ import { BlurView } from 'react-native-blur';
 // 模糊图片组件
 import BlurImage from '../../components/BlurImage'
 
+// 封面和简要信息
+import MovieCoverInfo from '../../components/MovieCoverInfo'
+
 // API地址
 const API_PATH = 'https://api.douban.com/v2/movie/subject/';
 
@@ -52,11 +55,10 @@ export default class MovieDetails extends React.Component {
           <BlurImage uri={this.props.movieData.images.large}/>
         </View>
         {/*内容层*/}
-        <View style={StylesMovieDetails.containerHeader}>
-
-        </View>
         <View style={StylesMovieDetails.container}>
-          <View style={StylesMovieDetails.containerHeader}></View>
+          <View style={StylesMovieDetails.containerHeader}>
+            <MovieCoverInfo movieData={this.props.movieData}/>
+          </View>
           <View style={StylesMovieDetails.containerBody}></View>
         </View>
       </View>
@@ -67,8 +69,8 @@ export default class MovieDetails extends React.Component {
 const StylesMovieDetails = StyleSheet.create({
   body: {
     flex: 1,
-    marginTop: 60,
-    position: 'relative'
+    position: 'relative',
+    marginTop: 64
   },
   absolute: {
     position: 'absolute',
@@ -78,13 +80,13 @@ const StylesMovieDetails = StyleSheet.create({
     right: -50
   },
   container: {
-    flex: 1,
-    marginTop: 60
+    flex: 1
   },
   containerHeader: {
     height: 200
   },
   containerBody: {
-    flex: 1
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.4)'
   }
 })
