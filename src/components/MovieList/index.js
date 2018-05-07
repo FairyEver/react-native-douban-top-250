@@ -57,9 +57,9 @@ export default class extends React.Component {
     this.getData();
   };
   // 列表项目被点击了 继续向上一层传播
-  handlePress = (id) => {
+  handlePress = (MovieData) => {
     if (this.props.onPress) {
-      this.props.onPress(id)
+      this.props.onPress(MovieData)
     }
   };
   render () {

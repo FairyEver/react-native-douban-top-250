@@ -3,8 +3,8 @@ import { View, Text, TabBarIOS } from 'react-native';
 
 import unit from '../../unit/index.js';
 
-import PageTop250 from '../PageTop250';
-import NewMovie from '../NewMovie'
+import Top250 from '../Top250';
+import NewMovie from '../NewMovie';
 
 export default class AppIndex extends React.Component {
 
@@ -40,7 +40,7 @@ export default class AppIndex extends React.Component {
             selectedIcon={require('../../image/icon/tabbar/fire-active.png')}
             selected={this.state.activeTab === 'top'}
             onPress={() => {this.toggleTab('top')}}>
-            <PageTop250 navigator={navigator}/>
+            <Top250 navigator={navigator}/>
           </TabBarIOS.Item>
           <TabBarIOS.Item
             title="新片榜"

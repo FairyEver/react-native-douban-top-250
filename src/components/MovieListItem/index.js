@@ -14,14 +14,14 @@ export default class TopListItem extends React.Component {
     this.setState({ viewRef: findNodeHandle(this.backgroundImage) });
   };
   // 当点击了这项后
-  handlePress = (id) => {
+  handlePress = (MovieData) => {
     if (this.props.onPress) {
-      this.props.onPress(id)
+      this.props.onPress(MovieData)
     }
   };
   render () {
     return (
-      <TouchableOpacity onPress={() => {this.handlePress(this.props.data.id)}} activeOpacity={0.9}>
+      <TouchableOpacity onPress={() => {this.handlePress(this.props.data)}} activeOpacity={0.9}>
         <View style={styleTopListItem.body}>
           <Image
             ref={(img) => { this.backgroundImage = img; }}
