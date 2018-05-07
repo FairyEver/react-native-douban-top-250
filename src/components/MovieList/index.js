@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, View, Text, Image, StyleSheet, findNodeHandle} from 'react-native';
+import { FlatList, View, Text, Image, StyleSheet, findNodeHandle } from 'react-native';
 import { BlurView } from 'react-native-blur';
 
 import Loading from '../Loading'
@@ -10,7 +10,7 @@ import MovieListItem from '../MovieListItem'
 const API_LIST = 'https://api.douban.com/v2/movie/top250';
 
 // 列表
-export default class extends React.Component {
+export default class MovieList extends React.Component {
   constructor (props) {
     super(props);
     // state

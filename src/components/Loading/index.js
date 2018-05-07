@@ -2,21 +2,25 @@ import React from 'react';
 import { StyleSheet, View, Text, ActivityIndicator  } from 'react-native';
 
 // 列表为空的时候显示的组件
-export default class extends React.Component {
+export default class Loading extends React.Component {
   constructor (props) {
     super(props);
   };
   render () {
     return (
-      <View style={LoadingStyles.body}>
+      <View style={StylesLoading.body}>
         <ActivityIndicator />
+        <Text>loading</Text>
       </View>
     )
   }
 };
 
-const LoadingStyles = StyleSheet.create({
+const StylesLoading = StyleSheet.create({
   body: {
-    marginTop: 100
+    height: 100,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
