@@ -20,7 +20,7 @@ export default class extends React.Component {
     // 请求数据时的设置
     this.fetchSetting = {
       start: 0,
-      count: 18
+      count: 10
     };
     // 请求数据
     this.getData();
@@ -52,8 +52,12 @@ export default class extends React.Component {
         }
       });
   };
+  // 滚动到底部了
   handleEndReached = () => {
     this.getData();
+  };
+  handleMovieListItemPress = (id) => {
+    console.log(id)
   };
   render () {
     return (
@@ -62,7 +66,11 @@ export default class extends React.Component {
         data={this.state.list}
         onEndReachedThreshold={0.5}
         onEndReached={this.handleEndReached}
-        renderItem={({item}) => <MovieListItem data={item} />}
+        renderItem={({item}) => {
+          return (
+            <MovieListItem data={item} onPress={this.handleMovieListItemPress}/>
+          )
+        }}
       />
     );
   }

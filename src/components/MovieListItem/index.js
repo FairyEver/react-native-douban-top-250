@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet, findNodeHandle} from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, findNodeHandle} from 'react-native';
 import { BlurView } from 'react-native-blur';
 
 import Rating from '../Rating'
@@ -10,56 +10,61 @@ export default class TopListItem extends React.Component {
     super(props);
     this.state = { viewRef: null };
   };
-  imageLoaded() {
+  imageLoaded = () => {
     this.setState({ viewRef: findNodeHandle(this.backgroundImage) });
+  };
+  // 当点击了这项后
+  handlePress = (id) => {
+    if (this.props.onPress) {
+      this.props.onPress(id)
+    }
   };
   render () {
     return (
-      <View style={styleTopListItem.body}>
-        {/*背景*/}
-        <Image
-          ref={(img) => { this.backgroundImage = img; }}
-          source={{uri: this.props.data.images.large}}
-          style={styleTopListItem.absolute}
-          onLoadEnd={this.imageLoaded.bind(this)}
-        />
-        <BlurView
-          style={styleTopListItem.absolute}
-          viewRef={this.state.viewRef}
-          blurType="dark"
-          blurAmount={10}
-        />
-        {/*前景*/}
-        <View
-          style={styleTopListItem.layerInfo}
-        >
+      <TouchableOpacity onPress={() => {this.handlePress(this.props.data.id)}} activeOpacity={0.9}>
+        <View style={styleTopListItem.body}>
           <Image
-            style={styleTopListItem.cover}
+            ref={(img) => { this.backgroundImage = img; }}
             source={{uri: this.props.data.images.large}}
+            style={styleTopListItem.absolute}
+            onLoadEnd={this.imageLoaded.bind(this)}
+          />
+          <BlurView
+            style={styleTopListItem.absolute}
+            viewRef={this.state.viewRef}
+            blurType="dark"
+            blurAmount={10}
           />
           <View
-            style={styleTopListItem.infoGroup}
+            style={styleTopListItem.layerInfo}
           >
-            <Text style={styleTopListItem.title} numberOfLines={1}>
-              {this.props.data.title}
-            </Text>
-            <Text style={styleTopListItem.subTitle} numberOfLines={1}>
-              {this.props.data.original_title} {this.props.data.year}
-            </Text>
-            <Text style={styleTopListItem.genres}>
-              {this.props.data.genres.join(' ')}
-            </Text>
-            <Rating
-              average={this.props.data.rating.average}
-              stars={Number(this.props.data.rating.stars)}
+            <Image
+              style={styleTopListItem.cover}
+              source={{uri: this.props.data.images.large}}
             />
+            <View
+              style={styleTopListItem.infoGroup}
+            >
+              <Text style={styleTopListItem.title} numberOfLines={1}>
+                {this.props.data.title}
+              </Text>
+              <Text style={styleTopListItem.subTitle} numberOfLines={1}>
+                {this.props.data.original_title} {this.props.data.year}
+              </Text>
+              <Text style={styleTopListItem.genres}>
+                {this.props.data.genres.join(' ')}
+              </Text>
+              <Rating
+                average={this.props.data.rating.average}
+                stars={Number(this.props.data.rating.stars)}
+              />
+            </View>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     )
   };
 }
-
 const styleTopListItem = StyleSheet.create({
   body: {
     height: 200,
