@@ -1,20 +1,27 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 
-export default class Stars extends React.Component {
+export default class Rating extends React.Component {
+  static defaultProps = {
+    unit: '分',
+    average: 0,
+    stars: 0,
+    starsMax: 5
+  };
+
   render () {
     return (
       <View style={styleStars.body}>
         <View style={styleStars.average}>
-          <Text style={styleStars.averageText}>{this.props.average}</Text>
+          <Text style={styleStars.averageText}>{this.props.average}{this.props.unit}</Text>
         </View>
         {
-          [...Array(10)].map((e, index) => index + 1).map(e => {
-            const average = this.props.average;
-            if (e <= average) {
+          [...Array(this.props.starsMax)].map((e, index) => index + 1).map(e => {
+            const stars = this.props.stars / 10;
+            if (e <= stars) {
               return (<Image key={e} style={styleStars.star} source={require('../../image/icon/star/10.png')} />);
-            } else if (e - average < 1) {
-              const n = 10 * average - 10 * (e - 1);
+            } else if (e - stars < 1) {
+              const n = 10 * stars - 10 * (e - 1);
               switch (n) {
                 case 1: return (<Image key={e} style={styleStars.star} source={require('../../image/icon/star/1.png')} />); break;
                 case 2: return (<Image key={e} style={styleStars.star} source={require('../../image/icon/star/2.png')} />); break;
