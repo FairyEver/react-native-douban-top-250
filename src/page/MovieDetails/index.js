@@ -22,7 +22,7 @@ export default class MovieDetails extends React.Component {
 
   // 获取数据
   getData = () => {
-    fetch(`${API_PATH}${this.props.id}`)
+    fetch(`${API_PATH}${this.props.movieData.id}`)
       .then(res => res.json())
       .then(res => {
         this.setState({
@@ -47,9 +47,11 @@ export default class MovieDetails extends React.Component {
   render() {
     return (
       <View style={StylesMovieDetails.body}>
+        {/*背景层*/}
         <View style={StylesMovieDetails.absolute}>
           <BlurImage uri={this.props.movieData.images.large}/>
         </View>
+        {/*内容层*/}
         <View style={StylesMovieDetails.containerHeader}>
 
         </View>
