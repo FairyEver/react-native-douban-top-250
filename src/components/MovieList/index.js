@@ -56,8 +56,11 @@ export default class extends React.Component {
   handleEndReached = () => {
     this.getData();
   };
-  handleMovieListItemPress = (id) => {
-    console.log(id)
+  // 列表项目被点击了 继续向上一层传播
+  handlePress = (id) => {
+    if (this.props.onPress) {
+      this.props.onPress(id)
+    }
   };
   render () {
     return (
@@ -68,7 +71,7 @@ export default class extends React.Component {
         onEndReached={this.handleEndReached}
         renderItem={({item}) => {
           return (
-            <MovieListItem data={item} onPress={this.handleMovieListItemPress}/>
+            <MovieListItem data={item} onPress={this.handlePress}/>
           )
         }}
       />

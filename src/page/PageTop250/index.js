@@ -4,9 +4,18 @@ import React from 'react';
 import MovieList from '../../components/MovieList'
 
 export default class App extends React.Component {
+  handlePress = (id) => {
+    this.navigatorPush()
+  };
+  navigatorPush = () => {
+    this.props.navigator.push({
+      title: 'Hello',
+      component: MovieList
+    })
+  };
   render() {
     return (
-      <MovieList />
+      <MovieList onPress={this.handlePress}/>
     );
   }
 };
