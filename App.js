@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, NavigatorIOS } from 'react-native';
+import { View, StyleSheet, StatusBar, NavigatorIOS } from 'react-native';
 
 // 首页
 import AppIndex from './src/page/AppIndex'
@@ -7,21 +7,29 @@ import AppIndex from './src/page/AppIndex'
 export default class App extends React.Component {
   render() {
     return (
-      <NavigatorIOS
-        style={styles.navigator}
-        // barTintColor={'#000'}
-        // titleTextColor={'#FFF'}
-        // navigationBarHidden={true}
-        initialRoute={{
-          title: '全球电影精享',
-          component: AppIndex
-        }}>
-      </NavigatorIOS>
+      <View style={styles.body}>
+        <StatusBar
+          barStyle={'light-content'}
+        />
+        <NavigatorIOS
+          style={styles.navigator}
+          // barTintColor={'#000'}
+          // titleTextColor={'#FFF'}
+          navigationBarHidden={true}
+          initialRoute={{
+            title: '全球电影精享',
+            component: AppIndex
+          }}>
+        </NavigatorIOS>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  body: {
+    flex: 1
+  },
   navigator: {
     flex: 1
   }
