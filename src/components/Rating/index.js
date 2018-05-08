@@ -14,7 +14,9 @@ export default class Rating extends React.Component {
     return (
       <View style={styleStars.body}>
         <View style={styleStars.average}>
-          <Text style={styleStars.averageText}>{this.props.average}{this.props.unit}</Text>
+          <Text style={styleStars.averageText}>
+            { this.props.average === 0 ? '暂无' : `${this.props.average}${this.props.unit}` }
+          </Text>
         </View>
         {
           [...Array(this.props.starsMax)].map((e, index) => index + 1).map(e => {

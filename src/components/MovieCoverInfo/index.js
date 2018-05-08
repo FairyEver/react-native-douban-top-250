@@ -14,6 +14,12 @@ export default class MovieCoverInfo extends React.Component {
     // state
   };
 
+  starsTransformer = (stars) => {
+    const [a, b] = stars;
+    const starsNumber = Number(a) * 10 - (b === '0' ? 5 : 0)
+    return starsNumber > 0 ? starsNumber : 0
+  }
+
   render() {
     return (
       <View style={StylesMovieCoverInfo.body}>
@@ -31,7 +37,7 @@ export default class MovieCoverInfo extends React.Component {
           <Text style={StylesMovieCoverInfo.genres}>
             {this.props.movieData.genres.join(' ')}
           </Text>
-          <Rating average={this.props.movieData.rating.average} stars={Number(this.props.movieData.rating.stars)}/>
+          <Rating average={this.props.movieData.rating.average} stars={this.starsTransformer(this.props.movieData.rating.stars)}/>
           {/*主演*/}
           <Text style={StylesMovieCoverInfo.casts}>{ this.props.movieData.casts.map(e => e.name).join(' | ') }</Text>
         </View>
