@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, findNodeHandle } from 'react-native';
+import { StyleSheet, View, Text, ActivityIndicator } from 'react-native';
 import { BlurView } from 'react-native-blur';
 
 // 模糊图片组件
@@ -29,10 +29,8 @@ export default class MovieDetails extends React.Component {
       .then(res => res.json())
       .then(res => {
         this.setState({
+          loaded: true,
           data: res
-        })
-        this.setState({
-          loaded: true
         })
         console.log(res)
       });
@@ -59,7 +57,11 @@ export default class MovieDetails extends React.Component {
           <View style={StylesMovieDetails.containerHeader}>
             <MovieCoverInfo movieData={this.props.movieData}/>
           </View>
-          <View style={StylesMovieDetails.containerBody}></View>
+          <View style={StylesMovieDetails.containerBody}>
+            <View style={StylesMovieDetails.containerBodyLoading}>
+              <ActivityIndicator />
+            </View>
+          </View>
         </View>
       </View>
     );
@@ -75,9 +77,9 @@ const StylesMovieDetails = StyleSheet.create({
   absolute: {
     position: 'absolute',
     top: -50,
-    bottom: -50,
-    left: -50,
-    right: -50
+    bottom: -10,
+    left: -10,
+    right: -10
   },
   container: {
     flex: 1
@@ -88,5 +90,10 @@ const StylesMovieDetails = StyleSheet.create({
   containerBody: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.4)'
+  },
+  containerBodyLoading: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })

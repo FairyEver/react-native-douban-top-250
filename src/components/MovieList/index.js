@@ -11,6 +11,11 @@ const API_LIST = 'https://api.douban.com/v2/movie/top250';
 
 // 列表
 export default class MovieList extends React.Component {
+
+  static defaultProps = {
+    //
+  };
+
   constructor (props) {
     super(props);
     // state
@@ -27,6 +32,7 @@ export default class MovieList extends React.Component {
     // 请求结束了 请求不到数据了
     this.end = false;
   };
+
   // 获取数据
   getData = () => {
     if (this.end) {
@@ -52,6 +58,7 @@ export default class MovieList extends React.Component {
         }
       });
   };
+
   // 滚动到底部了
   handleEndReached = () => {
     this.getData();
