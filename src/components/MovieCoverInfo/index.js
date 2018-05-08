@@ -26,12 +26,14 @@ export default class MovieCoverInfo extends React.Component {
             {this.props.movieData.title}
           </Text>
           <Text style={StylesMovieCoverInfo.subTitle} numberOfLines={1}>
-            {this.props.movieData.original_title} {this.props.movieData.year}
+            {this.props.movieData.original_title} ( {this.props.movieData.year} )
           </Text>
           <Text style={StylesMovieCoverInfo.genres}>
             {this.props.movieData.genres.join(' ')}
           </Text>
           <Rating average={this.props.movieData.rating.average} stars={Number(this.props.movieData.rating.stars)}/>
+          {/*主演*/}
+          <Text style={StylesMovieCoverInfo.casts}>{ this.props.movieData.casts.map(e => e.name).join(' | ') }</Text>
         </View>
       </View>
     );
@@ -52,9 +54,10 @@ const StylesMovieCoverInfo = StyleSheet.create({
     borderColor: '#FFF'
   },
   infoGroup: {
-    marginTop: 10,
-    marginBottom: 10,
-    marginRight: 10
+    flex: 1,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingRight: 10
   },
   title: {
     color: '#FFF',
@@ -69,6 +72,11 @@ const StylesMovieCoverInfo = StyleSheet.create({
   genres: {
     color: 'rgba(255, 255, 255, 0.7)',
     fontSize: 12,
+    marginTop: 5
+  },
+  casts: {
+    color: 'rgba(255, 255, 255, 0.6)',
+    fontSize: 10,
     marginTop: 5
   }
 })

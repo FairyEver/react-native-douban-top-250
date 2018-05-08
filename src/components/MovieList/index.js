@@ -4,6 +4,8 @@ import { BlurView } from 'react-native-blur';
 
 import Loading from '../Loading'
 
+import Banner from '../Banner'
+
 import MovieListItem from '../MovieListItem'
 
 // API地址
@@ -72,6 +74,7 @@ export default class MovieList extends React.Component {
     return (
       <FlatList
         ListEmptyComponent={Loading}
+        ListHeaderComponent={Banner}
         data={this.state.list}
         onEndReachedThreshold={0.5}
         onEndReached={this.handleEndReached}
