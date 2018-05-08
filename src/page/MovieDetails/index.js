@@ -1,6 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, Text, ActivityIndicator } from 'react-native';
-import { BlurView } from 'react-native-blur';
+import { StyleSheet, View, Text } from 'react-native';
+
+// 居中显示的 loading 组件
+import LoadingFull from '../../components/LoadingFull'
 
 // 模糊图片组件
 import BlurImage from '../../components/BlurImage'
@@ -8,41 +10,41 @@ import BlurImage from '../../components/BlurImage'
 // 封面和简要信息
 import MovieCoverInfo from '../../components/MovieCoverInfo'
 
-// API地址
-const API_PATH = 'https://api.douban.com/v2/movie/subject/';
-
 export default class MovieDetails extends React.Component {
 
   static defaultProps = {
+    // movieData 一定要包含 id
     movieData: {}
   };
 
   state = {
-    viewRef: null,
-    loaded: false,
+    // 正在请求数据
+    loading: false,
+    // 请求到的数据
     data: {}
   };
 
   // 获取数据
   getData = () => {
-    fetch(`${API_PATH}${this.props.movieData.id}`)
+    // 设置为加载中状态
+    this.setState({
+      loading: true
+    });
+    // 开始请求数据
+    fetch(`https://api.douban.com/v2/movie/subject/${this.props.movieData.id}`)
       .then(res => res.json())
       .then(res => {
         this.setState({
-          loaded: true,
+          loading: false,
           data: res
-        })
-        console.log(res)
+        });
       });
-  };
-
-  imageLoaded = () => {
-    this.setState({ viewRef: findNodeHandle(this.backgroundImage) });
   };
 
   // [生命周期] 组件已经加载完成
   componentDidMount () {
-    this.getData()
+    // 获取数据
+    this.getData();
   };
 
   render() {
@@ -54,13 +56,22 @@ export default class MovieDetails extends React.Component {
         </View>
         {/*内容层*/}
         <View style={StylesMovieDetails.container}>
+          {/*标题*/}
           <View style={StylesMovieDetails.containerHeader}>
             <MovieCoverInfo movieData={this.props.movieData}/>
           </View>
+          {/*下面的内容区域*/}
           <View style={StylesMovieDetails.containerBody}>
-            <View style={StylesMovieDetails.containerBodyLoading}>
-              <ActivityIndicator />
-            </View>
+            {/*加载指示器*/}
+            {
+              this.state.loading ?
+              <LoadingFull /> :
+              <View>
+                <Text>
+                  { this.state.data.summary }
+                </Text>
+              </View>
+            }
           </View>
         </View>
       </View>
