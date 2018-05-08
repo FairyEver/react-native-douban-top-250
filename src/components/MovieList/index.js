@@ -48,7 +48,6 @@ export default class MovieList extends React.Component {
             ...e,
             key: String(Math.random() * 10000000000)
           }));
-          console.log(newData)
           this.setState({
             list: [...this.state.list, ...newData]
           });
