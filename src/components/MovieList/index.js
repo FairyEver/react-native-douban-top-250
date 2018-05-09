@@ -44,7 +44,7 @@ export default class MovieList extends React.Component {
     fetch(`https://api.douban.com/v2/movie/top250?start=${start}&count=${count}`)
       .then(res => res.json())
       .then(res => {
-        const subjects = res.subjects || []
+        const subjects = res.subjects || [];
         if (subjects.length > 0) {
           const newData = res.subjects.map(e => ({
             ...e,
@@ -55,7 +55,7 @@ export default class MovieList extends React.Component {
           });
           this.fetchSetting.start += count;
         } else {
-          this.end = true
+          this.end = true;
         }
       });
   };
@@ -67,7 +67,7 @@ export default class MovieList extends React.Component {
   // 列表项目被点击了 继续向上一层传播
   handlePress = (MovieData) => {
     if (this.props.onPress) {
-      this.props.onPress(MovieData)
+      this.props.onPress(MovieData);
     }
   };
   render () {
