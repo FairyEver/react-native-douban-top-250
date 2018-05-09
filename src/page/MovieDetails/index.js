@@ -86,7 +86,7 @@ const StylesMovieDetails = StyleSheet.create({
   body: {
     flex: 1,
     position: 'relative',
-    marginTop: 64
+    marginTop: 20
   },
   absolute: {
     position: 'absolute',
