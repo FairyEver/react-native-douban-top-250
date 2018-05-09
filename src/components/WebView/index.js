@@ -33,6 +33,7 @@ export default class WebViewComponent extends React.Component {
       <View style={StylesWebViewComponent.body}>
         <WebView
           style={StylesWebViewComponent.body}
+          scalesPageToFit={false}
           source={{uri: this.props.url}}
           injectedJavaScript={this.jsCode}
         />

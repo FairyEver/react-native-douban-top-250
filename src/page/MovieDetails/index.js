@@ -130,7 +130,8 @@ export default class MovieDetails extends React.Component {
 const StylesMovieDetails = StyleSheet.create({
   body: {
     flex: 1,
-    position: 'relative'
+    position: 'relative',
+    marginTop: 20,
   },
   absolute: {
     position: 'absolute',
