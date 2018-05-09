@@ -25,7 +25,6 @@ export default class Banner extends React.Component {
 const StylesBanner = StyleSheet.create({
   bodyTop250: {
     height: 100,
-    marginTop: -20,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: unit.COLOR.TOP250

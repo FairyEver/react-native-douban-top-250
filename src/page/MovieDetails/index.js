@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
 
 // 居中显示的 loading 组件
 import LoadingFull from '../../components/LoadingFull'
@@ -9,6 +9,9 @@ import BlurImage from '../../components/BlurImage'
 
 // 封面和简要信息
 import MovieCoverInfo from '../../components/MovieCoverInfo'
+
+// 豆瓣详情页
+import MovieDetailsWeb from '../MovieDetailsWeb'
 
 export default class MovieDetails extends React.Component {
 
@@ -47,9 +50,25 @@ export default class MovieDetails extends React.Component {
     this.getData();
   };
 
+  // 点击返回按钮
   handleClickBack = () => {
-    console.log(this.props)
     this.props.navigator.pop()
+  };
+
+  // 点击查看网页按钮
+  handleClickDouban = () => {
+    this.props.navigator.push({
+      title: 'douban',
+      component: MovieDetailsWeb,
+      passProps: {
+        movieData: this.state.data
+      }
+    });
+  };
+
+  // 点击分享按钮
+  handleClickShare = () => {
+    alert('敬请期待')
   };
 
   render() {
@@ -82,11 +101,27 @@ export default class MovieDetails extends React.Component {
             }
           </View>
         </View>
-        <TouchableOpacity onPress={this.handleClickBack}>
-          <View style={StylesMovieDetails.footer}>
-            <Text style={StylesMovieDetails.footerText}>返回</Text>
-          </View>
-        </TouchableOpacity>
+        <View style={StylesMovieDetails.footer}>
+          <TouchableOpacity onPress={this.handleClickBack}>
+            <View style={StylesMovieDetails.footerBtn}>
+              <Image source={require('../../image/icon/btn/back.png')}></Image>
+            </View>
+          </TouchableOpacity>
+          {
+            this.state.data.id ? <TouchableOpacity onPress={this.handleClickDouban}>
+              <View style={StylesMovieDetails.footerBtn}>
+                <Image source={require('../../image/icon/btn/browser.png')}></Image>
+              </View>
+            </TouchableOpacity> : ''
+          }
+          {
+            this.state.data.id ? <TouchableOpacity onPress={this.handleClickShare}>
+              <View style={StylesMovieDetails.footerBtn}>
+                <Image source={require('../../image/icon/btn/share.png')}></Image>
+              </View>
+            </TouchableOpacity> : ''
+          }
+        </View>
       </View>
     );
   }
@@ -95,8 +130,7 @@ export default class MovieDetails extends React.Component {
 const StylesMovieDetails = StyleSheet.create({
   body: {
     flex: 1,
-    position: 'relative',
-    marginTop: 20
+    position: 'relative'
   },
   absolute: {
     position: 'absolute',
@@ -127,17 +161,19 @@ const StylesMovieDetails = StyleSheet.create({
   containerSummary: {
     color: '#FFF'
   },
-  // 页面容器 主要的内容在这里
+  // footer
   footer: {
     height: 48,
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     backgroundColor: 'rgba(0, 0, 0, 0.6)',
     borderTopColor: 'rgba(255, 255, 255, 0.5)',
     borderTopWidth: 0.5
   },
-  footerText: {
-    fontSize: 16,
-    color: 'rgba(255, 255, 255, 0.5)'
+  footerBtn: {
+    height: 48,
+    width: 48,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })

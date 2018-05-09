@@ -37,6 +37,7 @@ export default class MovieCoverInfo extends React.Component {
           <Text style={StylesMovieCoverInfo.genres}>
             {this.props.movieData.genres.join(' ')}
           </Text>
+          {/*星星*/}
           <Rating average={this.props.movieData.rating.average} stars={this.starsTransformer(this.props.movieData.rating.stars)}/>
           {/*主演*/}
           <Text style={StylesMovieCoverInfo.casts}>{ this.props.movieData.casts.map(e => e.name).join(' | ') }</Text>
