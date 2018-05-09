@@ -4,6 +4,8 @@ import { StyleSheet, View, Text, Image, TouchableOpacity, WebView } from 'react-
 // 模糊图片组件
 import BlurImage from '../../components/BlurImage'
 
+import Browser from '../Browser'
+
 export default class MovieDetailsWeb extends React.Component {
 
   static defaultProps = {
@@ -13,6 +15,15 @@ export default class MovieDetailsWeb extends React.Component {
   // 点击返回按钮
   handleClickBack = () => {
     this.props.navigator.pop()
+  };
+
+  handleClickBrowser = () => {
+    this.props.navigator.push({
+      component: Browser,
+      passProps: {
+        url: this.props.movieData.share_url
+      }
+    })
   };
 
   jsCode = `
@@ -71,7 +82,7 @@ export default class MovieDetailsWeb extends React.Component {
               <Image source={require('../../image/icon/btn/back.png')}></Image>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.handleClickBack}>
+          <TouchableOpacity onPress={this.handleClickBrowser}>
             <View style={StylesMovieDetailsWeb.footerBtnText}>
               <Text style={StylesMovieDetailsWeb.footerBtnTextText}>原始网页</Text>
             </View>
