@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
 
 // 居中显示的 loading 组件
 import LoadingFull from '../../components/LoadingFull'
@@ -47,6 +47,11 @@ export default class MovieDetails extends React.Component {
     this.getData();
   };
 
+  handleClickBack = () => {
+    console.log(this.props)
+    this.props.navigator.pop()
+  };
+
   render() {
     return (
       <View style={StylesMovieDetails.body}>
@@ -77,6 +82,11 @@ export default class MovieDetails extends React.Component {
             }
           </View>
         </View>
+        <TouchableOpacity onPress={this.handleClickBack}>
+          <View style={StylesMovieDetails.footer}>
+            <Text style={StylesMovieDetails.footerText}>返回</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -106,7 +116,9 @@ const StylesMovieDetails = StyleSheet.create({
   // 页面容器 主要的内容在这里
   containerBody: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.4)'
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    borderTopColor: 'rgba(255, 255, 255, 0.4)',
+    borderTopWidth: 0.5
   },
   containerBodyScrollView: {
     flex: 1,
@@ -114,5 +126,18 @@ const StylesMovieDetails = StyleSheet.create({
   },
   containerSummary: {
     color: '#FFF'
+  },
+  // 页面容器 主要的内容在这里
+  footer: {
+    height: 48,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    borderTopColor: 'rgba(255, 255, 255, 0.5)',
+    borderTopWidth: 0.5
+  },
+  footerText: {
+    fontSize: 16,
+    color: 'rgba(255, 255, 255, 0.5)'
   }
 })
