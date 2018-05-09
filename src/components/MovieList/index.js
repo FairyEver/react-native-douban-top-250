@@ -2,14 +2,14 @@ import React from 'react';
 import { FlatList, View, Text, Image, StyleSheet, findNodeHandle } from 'react-native';
 import { BlurView } from 'react-native-blur';
 
+// 加载
 import Loading from '../Loading'
 
+// 顶部导航
 import Banner from '../Banner'
 
+// 列表项目
 import MovieListItem from '../MovieListItem'
-
-// API地址
-const API_LIST = 'https://api.douban.com/v2/movie/top250';
 
 // 列表
 export default class MovieList extends React.Component {
@@ -41,7 +41,7 @@ export default class MovieList extends React.Component {
       return
     }
     const { start, count } = this.fetchSetting;
-    fetch(`${API_LIST}?start=${start}&count=${count}`)
+    fetch(`https://api.douban.com/v2/movie/top250?start=${start}&count=${count}`)
       .then(res => res.json())
       .then(res => {
         const subjects = res.subjects || []
@@ -73,6 +73,7 @@ export default class MovieList extends React.Component {
   render () {
     return (
       <FlatList
+        style={StylesMovieList.list}
         ListEmptyComponent={Loading}
         ListHeaderComponent={Banner}
         data={this.state.list}
@@ -87,3 +88,9 @@ export default class MovieList extends React.Component {
     );
   }
 };
+
+const StylesMovieList = StyleSheet.create({
+  list: {
+    backgroundColor: '#000'
+  }
+})
