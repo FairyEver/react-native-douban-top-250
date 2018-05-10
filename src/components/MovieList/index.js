@@ -15,7 +15,12 @@ import MovieListItem from '../MovieListItem'
 export default class MovieList extends React.Component {
 
   static defaultProps = {
-    //
+    // 是哪个列表
+    type: 'top250',
+    // 请求数据的地址
+    url: '',
+    // 数据转换函数
+    translatorFunction: (data) => data
   };
 
   constructor (props) {
@@ -41,10 +46,11 @@ export default class MovieList extends React.Component {
       return
     }
     const { start, count } = this.fetchSetting;
-    fetch(`https://api.douban.com/v2/movie/top250?start=${start}&count=${count}`)
+    fetch(`${this.props.url}?start=${start}&count=${count}`)
       .then(res => res.json())
       .then(res => {
-        const subjects = res.subjects || [];
+        // 在参数里传递进来数据转换方法
+        const subjects = this.props.translatorFunction(res.subjects || []);
         if (subjects.length > 0) {
           const newData = res.subjects.map(e => ({
             ...e,

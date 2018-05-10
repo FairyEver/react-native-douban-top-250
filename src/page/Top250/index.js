@@ -21,6 +21,7 @@ export default class App extends React.Component {
     return (
       <MovieList
         type={'top250'}
+        url={'https://api.douban.com/v2/movie/top250'}
         onPress={this.handlePress}
       />
     );
