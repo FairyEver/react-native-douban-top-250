@@ -26,6 +26,16 @@ export default class Banner extends React.Component {
           <Image source={require('../../image/banner/na-rankings.png')}></Image>
         </View>
       ); break;
+      case 'now': return (
+        <View style={StylesBanner.now}>
+          <Image source={require('../../image/banner/now.png')}></Image>
+        </View>
+      ); break;
+      case 'coming': return (
+        <View style={StylesBanner.coming}>
+          <Image source={require('../../image/banner/coming.png')}></Image>
+        </View>
+      ); break;
       default: return ''; break;
     }
   };
@@ -58,5 +68,13 @@ const StylesBanner = StyleSheet.create({
   na: {
     ...pub,
     backgroundColor: unit.COLOR.PURPLE
+  },
+  now: {
+    ...pub,
+    backgroundColor: unit.COLOR.YELLOW
+  },
+  coming: {
+    ...pub,
+    backgroundColor: unit.COLOR.BLUE
   }
 });

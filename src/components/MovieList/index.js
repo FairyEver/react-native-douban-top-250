@@ -52,7 +52,8 @@ export default class MovieList extends React.Component {
         // 在参数里传递进来数据转换方法
         const subjects = this.props.translatorFunction(res.subjects || []);
         if (subjects.length > 0) {
-          const newData = res.subjects.map(e => ({
+          // 加上 key
+          const newData = subjects.map(e => ({
             ...e,
             key: String(Math.random() * 10000000000)
           }));

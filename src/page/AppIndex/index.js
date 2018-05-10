@@ -5,6 +5,8 @@ import unit from '../../unit/index.js';
 
 import Top250 from '../Top250';
 import NaRankings from '../NaRankings';
+import Now from '../Now';
+import Coming from '../Coming';
 
 export default class AppIndex extends React.Component {
 
@@ -56,7 +58,7 @@ export default class AppIndex extends React.Component {
             selectedIcon={require('../../image/icon/tabbar/now-active.png')}
             selected={this.state.activeTab === 'now'}
             onPress={() => {this.toggleTab('now')}}>
-            <Text>Search</Text>
+            <Now navigator={navigator}/>
           </TabBarIOS.Item>
           <TabBarIOS.Item
             title="即将上映"
@@ -64,7 +66,7 @@ export default class AppIndex extends React.Component {
             selectedIcon={require('../../image/icon/tabbar/coming-active.png')}
             selected={this.state.activeTab === 'coming'}
             onPress={() => {this.toggleTab('coming')}}>
-            <Text>Search</Text>
+            <Coming navigator={navigator}/>
           </TabBarIOS.Item>
           <TabBarIOS.Item
             title="搜索"

@@ -6,7 +6,7 @@ import MovieList from '../../components/MovieList'
 // 电影详情页
 import MovieDetails from '../MovieDetails'
 
-export default class NaRanking extends React.Component {
+export default class Now extends React.Component {
   // 点击了列表上某项
   handlePress = (movieData) => {
     this.props.navigator.push({
@@ -20,15 +20,8 @@ export default class NaRanking extends React.Component {
   render() {
     return (
       <MovieList
-        type={'na'}
-        url={'https://api.douban.com/v2/movie/us_box'}
-        translatorFunction={list => list.map((item, index) => {
-          return {
-            ...item.subject,
-            box: item.box,
-            rank: item.rank
-          }
-        })}
+        type={'now'}
+        url={'https://api.douban.com/v2/movie/in_theaters'}
         onPress={this.handlePress}
       />
     );
