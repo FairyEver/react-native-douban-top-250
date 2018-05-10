@@ -75,7 +75,7 @@ export default class MovieList extends React.Component {
       <FlatList
         style={StylesMovieList.list}
         ListEmptyComponent={Loading}
-        ListHeaderComponent={Banner}
+        ListHeaderComponent={<Banner type={this.props.type}/>}
         data={this.state.list}
         onEndReachedThreshold={0.5}
         onEndReached={this.handleEndReached}

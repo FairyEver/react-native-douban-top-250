@@ -4,7 +4,7 @@ import { View, Text, TabBarIOS } from 'react-native';
 import unit from '../../unit/index.js';
 
 import Top250 from '../Top250';
-import New from '../New';
+import NaRankings from '../NaRankings';
 
 export default class AppIndex extends React.Component {
 
@@ -35,7 +35,7 @@ export default class AppIndex extends React.Component {
       <View style={{flex: 1}}>
         <TabBarIOS tintColor={this.state.tintColor}>
           <TabBarIOS.Item
-            title="TOP250"
+            title="巅峰作品"
             icon={require('../../image/icon/tabbar/fire-normal.png')}
             selectedIcon={require('../../image/icon/tabbar/fire-active.png')}
             selected={this.state.activeTab === 'top'}
@@ -43,12 +43,12 @@ export default class AppIndex extends React.Component {
             <Top250 navigator={navigator}/>
           </TabBarIOS.Item>
           <TabBarIOS.Item
-            title="新片榜"
-            icon={require('../../image/icon/tabbar/new-normal.png')}
-            selectedIcon={require('../../image/icon/tabbar/new-active.png')}
+            title="北美票房榜"
+            icon={require('../../image/icon/tabbar/na-rankings-normal.png')}
+            selectedIcon={require('../../image/icon/tabbar/na-rankings-active.png')}
             selected={this.state.activeTab === 'new'}
             onPress={() => {this.toggleTab('new')}}>
-            <New />
+            <NaRankings navigator={navigator}/>
           </TabBarIOS.Item>
           <TabBarIOS.Item
             title="正在热映"

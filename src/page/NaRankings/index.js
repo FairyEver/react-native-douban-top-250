@@ -19,7 +19,10 @@ export default class App extends React.Component {
   };
   render() {
     return (
-      <MovieList showIndex={true} onPress={this.handlePress}/>
+      <MovieList
+        type={'na'}
+        onPress={this.handlePress}
+      />
     );
   }
 };
