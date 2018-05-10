@@ -11,6 +11,9 @@ import Banner from '../Banner'
 // 列表项目
 import MovieListItem from '../MovieListItem'
 
+// 公用
+import unit from "../../unit";
+
 // 列表
 export default class MovieList extends React.Component {
 
@@ -71,16 +74,28 @@ export default class MovieList extends React.Component {
   handleEndReached = () => {
     this.getData();
   };
+
   // 列表项目被点击了 继续向上一层传播
   handlePress = (MovieData) => {
     if (this.props.onPress) {
       this.props.onPress(MovieData);
     }
   };
+
+  chooseColor = () => {
+    switch (this.props.type) {
+      case 'top250': return  StylesMovieList.top250; break;
+      case 'na': return  StylesMovieList.na; break;
+      case 'now': return  StylesMovieList.now; break;
+      case 'coming': return  StylesMovieList.coming; break;
+      default: return StylesMovieList.default; break;
+    }
+  };
+
   render () {
     return (
       <FlatList
-        style={StylesMovieList.list}
+        style={this.chooseColor()}
         ListEmptyComponent={Loading}
         ListHeaderComponent={<Banner type={this.props.type}/>}
         data={this.state.list}
@@ -97,7 +112,19 @@ export default class MovieList extends React.Component {
 };
 
 const StylesMovieList = StyleSheet.create({
-  list: {
-    backgroundColor: '#000'
+  default: {
+    backgroundColor: '#FFF'
+  },
+  top250: {
+    backgroundColor: unit.COLOR.TOP250
+  },
+  na: {
+    backgroundColor: unit.COLOR.PURPLE
+  },
+  now: {
+    backgroundColor: unit.COLOR.YELLOW
+  },
+  coming: {
+    backgroundColor: unit.COLOR.BLUE
   }
 })

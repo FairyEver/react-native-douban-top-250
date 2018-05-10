@@ -1,6 +1,9 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 
+// 公用
+import unit from "../../unit";
+
 export default class Rating extends React.Component {
 
   static defaultProps = {
@@ -56,7 +59,7 @@ const styleStars = StyleSheet.create({
     borderRadius: 2,
     paddingLeft: 2,
     paddingRight: 2,
-    backgroundColor: '#FECD2F',
+    backgroundColor: unit.COLOR.STRA,
     marginRight: 5,
     justifyContent: 'center',
     alignItems: 'center'
