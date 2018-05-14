@@ -1,9 +1,5 @@
 import React from 'react';
 import { FlatList, View, Text, Image, StyleSheet, findNodeHandle } from 'react-native';
-import { BlurView } from 'react-native-blur';
-
-// 加载
-import Loading from '../Loading'
 
 // 顶部导航
 import Banner from '../Banner'
@@ -19,9 +15,11 @@ export default class MovieList extends React.Component {
 
   static defaultProps = {
     // 是哪个列表
-    type: 'top250',
+    type: '',
     // 请求数据的地址
     url: '',
+    // 地址后缀
+    urlSuffix: '',
     // 数据转换函数
     translatorFunction: (data) => data
   };
@@ -30,6 +28,9 @@ export default class MovieList extends React.Component {
     super(props);
     // state
     this.state = {
+      // 正在请求数据
+      loading: false,
+      // 列表
       list: []
     };
     // 请求数据时的设置
@@ -37,10 +38,13 @@ export default class MovieList extends React.Component {
       start: 0,
       count: 10
     };
-    // 请求数据
-    this.getData();
     // 请求结束了 请求不到数据了
     this.end = false;
+  };
+
+  componentDidMount () {
+    // 请求数据
+    this.getData();
   };
 
   // 获取数据
@@ -48,10 +52,17 @@ export default class MovieList extends React.Component {
     if (this.end) {
       return
     }
+    // 开始加载
+    this.setState({
+      loading: true
+    })
+    // 获取设置
     const { start, count } = this.fetchSetting;
-    fetch(`${this.props.url}?start=${start}&count=${count}`)
+    const urlSuffix = this.props.urlSuffix
+    fetch(`${this.props.url}?start=${start}&count=${count}${urlSuffix}`)
       .then(res => res.json())
       .then(res => {
+        console.log(res)
         // 在参数里传递进来数据转换方法
         const subjects = this.props.translatorFunction(res.subjects || []);
         if (subjects.length > 0) {
@@ -64,10 +75,21 @@ export default class MovieList extends React.Component {
             list: [...this.state.list, ...newData]
           });
           this.fetchSetting.start += count;
+          // 结束加载
+          this.setState({
+            loading: false
+          });
         } else {
+          // 结束加载
           this.end = true;
         }
-      });
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({
+          loading: false
+        });
+      })
   };
 
   // 滚动到底部了
@@ -92,39 +114,77 @@ export default class MovieList extends React.Component {
     }
   };
 
+  chooseView = () => {
+    if (this.state.list.length > 0) {
+      return (
+        <FlatList
+          refreshing={true}
+          ListHeaderComponent={this.props.type ? <Banner type={this.props.type}/> : ''}
+          data={this.state.list}
+          onEndReachedThreshold={0.5}
+          onEndReached={this.handleEndReached}
+          renderItem={({item}) => {
+            return (
+              <MovieListItem movieData={item} onPress={this.handlePress}/>
+            )
+          }}
+        />
+      )
+    } else if (this.state.list.length === 0 && this.state.loading === true) {
+      return (
+        <View style={StylesMovieList.card}>
+          <Text style={StylesMovieList.cardText}>正在载入</Text>
+        </View>
+      )
+    } else {
+      return (
+        <View style={StylesMovieList.card}>
+          <Text style={StylesMovieList.cardText}>没有数据</Text>
+        </View>
+      )
+    }
+  };
+
   render () {
     return (
-      <FlatList
-        style={this.chooseColor()}
-        ListEmptyComponent={Loading}
-        ListHeaderComponent={<Banner type={this.props.type}/>}
-        data={this.state.list}
-        onEndReachedThreshold={0.5}
-        onEndReached={this.handleEndReached}
-        renderItem={({item}) => {
-          return (
-            <MovieListItem movieData={item} onPress={this.handlePress}/>
-          )
-        }}
-      />
+      <View style={this.chooseColor()}>
+        { this.chooseView() }
+      </View>
     );
   }
 };
 
 const StylesMovieList = StyleSheet.create({
   default: {
-    backgroundColor: '#FFF'
+    flex: 1,
+    backgroundColor: '#FFF',
   },
   top250: {
+    flex: 1,
     backgroundColor: unit.COLOR.TOP250
   },
   na: {
+    flex: 1,
     backgroundColor: unit.COLOR.PURPLE
   },
   now: {
+    flex: 1,
     backgroundColor: unit.COLOR.YELLOW
   },
   coming: {
+    flex: 1,
     backgroundColor: unit.COLOR.BLUE
+  },
+  card: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    borderRadius: 4,
+    margin: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  cardText: {
+    color: '#FFF',
+    fontWeight: 'bold'
   }
 })

@@ -14,8 +14,6 @@ export default class App extends React.Component {
         />
         <NavigatorIOS
           style={styles.navigator}
-          // barTintColor={'#000'}
-          // titleTextColor={'#FFF'}
           interactivePopGestureEnabled={true}
           navigationBarHidden={true}
           initialRoute={{
@@ -30,9 +28,11 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   body: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#000'
   },
   navigator: {
-    flex: 1
+    flex: 1,
+    marginTop: 20
   }
 })

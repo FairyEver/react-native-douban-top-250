@@ -12,9 +12,8 @@ import SearchPage from '../SearchPage';
 export default class AppIndex extends React.Component {
 
   state = {
-    // activeTab: 'top',
-    activeTab: 'search',
-    tintColor: unit.COLOR.GREEN
+    activeTab: 'top',
+    tintColor: unit.COLOR.TOP250
   };
 
   // 切换tab
@@ -38,7 +37,7 @@ export default class AppIndex extends React.Component {
     return (
       <View style={{flex: 1}}>
         <TabBarIOS
-          // barTintColor={'#FFF'}
+          barTintColor={'#FFF'}
           tintColor={this.state.tintColor}>
           <TabBarIOS.Item
             title="巅峰作品"

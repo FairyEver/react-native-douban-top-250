@@ -4,7 +4,24 @@ import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 // 公用
 import unit from '../../unit'
 
+// 电影列表
+import MovieList from '../../components/MovieList'
+
+// 电影详情页
+import MovieDetails from '../MovieDetails'
+
 export default class SearchRes extends React.Component {
+
+  // 点击了列表上某项
+  handlePress = (movieData) => {
+    this.props.navigator.push({
+      title: movieData.title,
+      component: MovieDetails,
+      passProps: {
+        movieData: movieData
+      }
+    })
+  };
 
   // 点击返回按钮
   handleClickBack = () => {
@@ -23,7 +40,11 @@ export default class SearchRes extends React.Component {
           <Text style={StylesSearchRes.contentHeaderTitle}>搜索结果</Text>
         </View>
         <View style={StylesSearchRes.ContentBody}>
-          <Text>ContentBody</Text>
+          <MovieList
+            url={'https://api.douban.com/v2/movie/search'}
+            urlSuffix={`&q=${this.props.searchText}`}
+            onPress={this.handlePress}
+          />
         </View>
       </View>
     );
@@ -34,8 +55,7 @@ const StylesSearchRes = StyleSheet.create({
     flex: 1
   },
   contentHeader: {
-    paddingTop: 20,
-    height: 70,
+    height: 50,
     backgroundColor: unit.COLOR.GREEN,
     flexDirection: 'row',
     alignItems: 'center',
@@ -43,7 +63,7 @@ const StylesSearchRes = StyleSheet.create({
   },
   contentHeaderBackBth: {
     position: 'absolute',
-    top: 20,
+    top: 0,
     left: 0,
     height: 50,
     width: 50,

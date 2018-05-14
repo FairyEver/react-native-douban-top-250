@@ -58,8 +58,7 @@ const pub = {
 
 const StylesBanner = StyleSheet.create({
   body: {
-    height: 100,
-    marginTop: -20,
+    height: 100
   },
   top250: {
     ...pub,
