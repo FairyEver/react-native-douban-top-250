@@ -23,10 +23,6 @@ export default class MovieCoverInfo extends React.Component {
     return starsNumber > 0 ? starsNumber : 0
   };
 
-  componentDidMount () {
-    console.log(this.props.movieData)
-  };
-
   render() {
     return (
       <View style={StylesMovieCoverInfo.body}>

@@ -16,6 +16,7 @@ export default class App extends React.Component {
           style={styles.navigator}
           // barTintColor={'#000'}
           // titleTextColor={'#FFF'}
+          interactivePopGestureEnabled={true}
           navigationBarHidden={true}
           initialRoute={{
             title: '全球电影精享',

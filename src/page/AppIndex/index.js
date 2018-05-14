@@ -7,12 +7,14 @@ import Top250 from '../Top250';
 import NaRankings from '../NaRankings';
 import Now from '../Now';
 import Coming from '../Coming';
+import SearchPage from '../SearchPage';
 
 export default class AppIndex extends React.Component {
 
   state = {
-    activeTab: 'top',
-    tintColor: unit.COLOR.TOP250
+    // activeTab: 'top',
+    activeTab: 'search',
+    tintColor: unit.COLOR.GREEN
   };
 
   // 切换tab
@@ -35,7 +37,9 @@ export default class AppIndex extends React.Component {
     const { navigator } = this.props;
     return (
       <View style={{flex: 1}}>
-        <TabBarIOS tintColor={this.state.tintColor}>
+        <TabBarIOS
+          // barTintColor={'#FFF'}
+          tintColor={this.state.tintColor}>
           <TabBarIOS.Item
             title="巅峰作品"
             icon={require('../../image/icon/tabbar/fire-normal.png')}
@@ -74,7 +78,7 @@ export default class AppIndex extends React.Component {
             selectedIcon={require('../../image/icon/tabbar/search-active.png')}
             selected={this.state.activeTab === 'search'}
             onPress={() => {this.toggleTab('search')}}>
-            <Text>Search</Text>
+            <SearchPage navigator={navigator}/>
           </TabBarIOS.Item>
         </TabBarIOS>
       </View>
