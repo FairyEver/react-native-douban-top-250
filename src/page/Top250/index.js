@@ -35,4 +35,4 @@ const Styles = StyleSheet.create({
     flex: 1,
     marginBottom: 49
   }
-})
+});

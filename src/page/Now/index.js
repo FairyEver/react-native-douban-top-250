@@ -1,4 +1,5 @@
 import React from 'react';
+import { View, StyleSheet } from 'react-native';
 
 // 电影列表
 import MovieList from '../../components/MovieList'
@@ -19,11 +20,19 @@ export default class Now extends React.Component {
   };
   render() {
     return (
-      <MovieList
-        type={'now'}
-        url={'https://api.douban.com/v2/movie/in_theaters'}
-        onPress={this.handlePress}
-      />
+      <View style={Styles.body}>
+        <MovieList
+          type={'now'}
+          url={'https://api.douban.com/v2/movie/in_theaters'}
+          onPress={this.handlePress}
+        />
+      </View>
     );
   }
 };
+const Styles = StyleSheet.create({
+  body: {
+    flex: 1,
+    marginBottom: 49
+  }
+});

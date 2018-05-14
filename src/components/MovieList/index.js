@@ -75,14 +75,13 @@ export default class MovieList extends React.Component {
             list: [...this.state.list, ...newData]
           });
           this.fetchSetting.start += count;
-          // 结束加载
-          this.setState({
-            loading: false
-          });
         } else {
-          // 结束加载
           this.end = true;
         }
+        // 结束加载
+        this.setState({
+          loading: false
+        });
       })
       .catch(err => {
         console.log(err);
@@ -114,8 +113,8 @@ export default class MovieList extends React.Component {
     }
   };
 
-  chooseView = () => {
-    if (this.state.list.length > 0) {
+  chooseView = (length, loading) => {
+    if (length > 0) {
       return (
         <FlatList
           refreshing={true}
@@ -130,7 +129,7 @@ export default class MovieList extends React.Component {
           }}
         />
       )
-    } else if (this.state.list.length === 0 && this.state.loading === true) {
+    } else if (length === 0 && loading === true) {
       return (
         <View style={StylesMovieList.card}>
           <Text style={StylesMovieList.cardText}>正在载入</Text>
@@ -148,7 +147,7 @@ export default class MovieList extends React.Component {
   render () {
     return (
       <View style={this.chooseColor()}>
-        { this.chooseView() }
+        { this.chooseView(this.state.list.length, this.state.loading) }
       </View>
     );
   }
