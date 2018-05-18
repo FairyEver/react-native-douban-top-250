@@ -101,27 +101,27 @@ export default class MovieDetails extends React.Component {
             }
           </View>
         </View>
-        <View style={StylesMovieDetails.footer}>
-          <TouchableOpacity onPress={this.handleClickBack}>
-            <View style={StylesMovieDetails.footerBtn}>
-              <Image source={require('../../image/icon/btn/back.png')}></Image>
-            </View>
-          </TouchableOpacity>
-          {
-            this.state.data.id ? <TouchableOpacity onPress={this.handleClickDouban}>
-              <View style={StylesMovieDetails.footerBtn}>
-                <Image source={require('../../image/icon/btn/browser.png')}></Image>
-              </View>
-            </TouchableOpacity> : ''
-          }
-          {
-            this.state.data.id ? <TouchableOpacity onPress={this.handleClickShare}>
-              <View style={StylesMovieDetails.footerBtn}>
-                <Image source={require('../../image/icon/btn/share.png')}></Image>
-              </View>
-            </TouchableOpacity> : ''
-          }
-        </View>
+        {/*<View style={StylesMovieDetails.footer}>*/}
+          {/*<TouchableOpacity onPress={this.handleClickBack}>*/}
+            {/*<View style={StylesMovieDetails.footerBtn}>*/}
+              {/*<Image source={require('../../image/icon/btn/back.png')}></Image>*/}
+            {/*</View>*/}
+          {/*</TouchableOpacity>*/}
+          {/*{*/}
+            {/*this.state.data.id ? <TouchableOpacity onPress={this.handleClickDouban}>*/}
+              {/*<View style={StylesMovieDetails.footerBtn}>*/}
+                {/*<Image source={require('../../image/icon/btn/browser.png')}></Image>*/}
+              {/*</View>*/}
+            {/*</TouchableOpacity> : ''*/}
+          {/*}*/}
+          {/*{*/}
+            {/*this.state.data.id ? <TouchableOpacity onPress={this.handleClickShare}>*/}
+              {/*<View style={StylesMovieDetails.footerBtn}>*/}
+                {/*<Image source={require('../../image/icon/btn/share.png')}></Image>*/}
+              {/*</View>*/}
+            {/*</TouchableOpacity> : ''*/}
+          {/*}*/}
+        {/*</View>*/}
       </View>
     );
   }
@@ -130,7 +130,8 @@ export default class MovieDetails extends React.Component {
 const StylesMovieDetails = StyleSheet.create({
   body: {
     flex: 1,
-    position: 'relative'
+    position: 'relative',
+    marginTop: 45
   },
   absolute: {
     position: 'absolute',

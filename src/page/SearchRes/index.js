@@ -31,14 +31,14 @@ export default class SearchRes extends React.Component {
   render() {
     return (
       <View style={StylesSearchRes.body}>
-        <View style={StylesSearchRes.contentHeader}>
-          <TouchableOpacity
-            style={StylesSearchRes.contentHeaderBackBth}
-            onPress={this.handleClickBack}>
-            <Image source={require('../../image/icon/btn/back.png')}/>
-          </TouchableOpacity>
-          <Text style={StylesSearchRes.contentHeaderTitle}>搜索结果</Text>
-        </View>
+        {/*<View style={StylesSearchRes.contentHeader}>*/}
+          {/*<TouchableOpacity*/}
+            {/*style={StylesSearchRes.contentHeaderBackBth}*/}
+            {/*onPress={this.handleClickBack}>*/}
+            {/*<Image source={require('../../image/icon/btn/back.png')}/>*/}
+          {/*</TouchableOpacity>*/}
+          {/*<Text style={StylesSearchRes.contentHeaderTitle}>搜索结果</Text>*/}
+        {/*</View>*/}
         <View style={StylesSearchRes.ContentBody}>
           <MovieList
             url={'https://api.douban.com/v2/movie/search'}
@@ -52,7 +52,8 @@ export default class SearchRes extends React.Component {
 };
 const StylesSearchRes = StyleSheet.create({
   body: {
-    flex: 1
+    flex: 1,
+    marginTop: 45
   },
   contentHeader: {
     height: 50,

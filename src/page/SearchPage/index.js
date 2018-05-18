@@ -24,7 +24,7 @@ export default class SearchPage extends React.Component {
   handlePressSearchBtn = () => {
     if (this.state.searchText) {
       this.props.navigator.push({
-        title: 'SearchRes',
+        title: '搜索结果',
         component: SearchRes,
         passProps: {
           searchText: this.state.searchText
@@ -65,7 +65,8 @@ export default class SearchPage extends React.Component {
 };
 const StylesSearchPage = StyleSheet.create({
   body: {
-    flex: 1
+    flex: 1,
+    marginTop: 45
   },
   contentHeader: {
     height: 60,

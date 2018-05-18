@@ -15,7 +15,7 @@ export default class App extends React.Component {
         <NavigatorIOS
           style={styles.navigator}
           interactivePopGestureEnabled={true}
-          navigationBarHidden={true}
+          navigationBarHidden={false}
           initialRoute={{
             title: '全球电影精享',
             component: AppIndex

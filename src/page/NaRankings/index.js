@@ -11,7 +11,7 @@ export default class NaRanking extends React.Component {
   // 点击了列表上某项
   handlePress = (movieData) => {
     this.props.navigator.push({
-      title: movieData.title,
+      title: '电影详情',
       component: MovieDetails,
       passProps: {
         movieData: movieData
@@ -40,6 +40,7 @@ export default class NaRanking extends React.Component {
 const Styles = StyleSheet.create({
   body: {
     flex: 1,
-    marginBottom: 49
+    marginBottom: 49,
+    marginTop: 45
   }
 });
